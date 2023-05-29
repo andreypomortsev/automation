@@ -57,7 +57,7 @@ def main():
 
     # Report part
     summary = [run.read_txt(file, False) for file in descriptions]
-    title = "Sales summary for last month"
+    title = "Upload Completed - Online Fruit Store"
     attachement = "/tmp/processed.pdf"
     reports.generate_report(attachement, title, "<br/>".join(summary))
 

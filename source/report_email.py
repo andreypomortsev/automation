@@ -30,9 +30,9 @@ Author: Andrey Pomortsev
 
 import glob
 import os
-import reports
-import run
-import emails
+from source import reports
+from source import run
+from source import emails
 
 
 def main():
@@ -52,8 +52,9 @@ def main():
     Returns:
         None
     """
-    os.chdir("~/supplier-data/descriptions")
-    descriptions = tuple(glob.glob("*.txt"))
+
+    # os.chdir("~/supplier-data/descriptions")
+    descriptions = tuple(glob.glob("~/supplier-data/descriptions/*.txt"))
 
     # Report part
     summary = [run.read_txt(file, False) for file in descriptions]

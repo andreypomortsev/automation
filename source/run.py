@@ -27,7 +27,7 @@ Author: Andrey Pomortsev
 import glob
 import requests
 
-IP = ""
+IP = "localhost"
 PATH_TO_TXT = "~/supplier-data/descriptions/*.txt"
 POST_PATH = f"http://{IP}/fruits/"
 
@@ -54,7 +54,7 @@ def read_txt(txt_file: str, send: bool = True):
             key: value.strip("\nlbs") for key, value in zip(dict_keys, file.readlines())
         }
         data |= {"image_name": txt_file}
-        data["weight"] = int(data["weight"])
+        data['weight'] = int(data['weight'])
         if send:
             response = requests.post(POST_PATH, json=data, timeout=2)
             print(response.status_code)

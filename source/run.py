@@ -28,7 +28,7 @@ import glob
 import requests
 
 IP = ""
-PATH_TO_TXT = "supplier-data/descriptions/*.txt"
+PATH_TO_TXT = "~/supplier-data/descriptions/*.txt"
 POST_PATH = f"http://{IP}/fruits/"
 
 reviews = glob.glob(PATH_TO_TXT)

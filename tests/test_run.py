@@ -8,8 +8,8 @@ from source.run import read_txt, POST_PATH
 
 
 class TestUpload(unittest.TestCase):
-    """ Test source/run.py script on reading files and sending its contents by `requests.post()`
-    """
+    """Test source/run.py script on reading files and sending its contents by `requests.post()`"""
+
     def setUp(self):
         """
         Sets up the test case by creating a temporary text file with test data.
@@ -34,7 +34,7 @@ class TestUpload(unittest.TestCase):
         """
         Tests the behavior of the `read_txt()` function when called with a mock text file.
 
-        This test uses the temporarely file self.txt_file with test data, 
+        This test uses the temporarely file self.txt_file with test data,
         and then calls `read_txt()` with this file and the `send` flag set to False.
         The test asserts that the output string matches the expected output string.
 
@@ -54,9 +54,9 @@ class TestUpload(unittest.TestCase):
         Tests the functionality of the read_txt function with the flag `send` set to True.
 
         This test uses the `unittest.mock.patch` decorator to patch the `requests.post` method
-        with a mock object, and calls the `read_txt` function with a temporary file and 
+        with a mock object, and calls the `read_txt` function with a temporary file and
         the send flag set to True. The expected output is compared with the output of the function,
-        and the `assert_called_with` method of the mock object is used to verify that 
+        and the `assert_called_with` method of the mock object is used to verify that
         `requests.post` method was called with the expected arguments.
 
         Args:
@@ -84,6 +84,7 @@ class TestUpload(unittest.TestCase):
     def tearDown(self) -> None:
         os.remove(self.txt_file)
         return super().tearDown()
+
 
 if __name__ == "__main__":
     unittest.main()

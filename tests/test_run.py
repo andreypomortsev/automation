@@ -30,6 +30,9 @@ class TestUpload(unittest.TestCase):
         with open(self.txt_file, "w", encoding="UTF-8") as mock_file:
             mock_file.write(self.mock_text)
 
+    def tearDown(self) -> None:
+        os.remove(self.txt_file)
+
     def test_read_txt(self):
         """
         Tests the behavior of the `read_txt()` function when called with a mock text file.
@@ -80,10 +83,6 @@ class TestUpload(unittest.TestCase):
             },
             timeout=2,
         )
-
-    def tearDown(self) -> None:
-        os.remove(self.txt_file)
-        return super().tearDown()
 
 
 if __name__ == "__main__":

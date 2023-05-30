@@ -52,9 +52,9 @@ def main():
     Returns:
         None
     """
-
-    # os.chdir("~/supplier-data/descriptions")
-    descriptions = tuple(glob.glob("~/supplier-data/descriptions/*.txt"))
+    PATH = "~/supplier-data/descriptions"
+    full_path = os.path.expanduser(PATH)
+    descriptions = tuple(glob.glob(os.path.join(PATH, "*.txt")))
 
     # Report part
     summary = [run.read_txt(file, False) for file in descriptions]

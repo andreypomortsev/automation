@@ -2,7 +2,7 @@ import unittest
 import os
 import shutil
 from source import emails, reports, run
-from source import report_email, full_path
+from source import report_email
 
 
 class TestMain(unittest.TestCase):
@@ -12,8 +12,8 @@ class TestMain(unittest.TestCase):
         """Create folders from `full_path`, and txt files
         to check the modulde. 
         """
-        if not os.path.exists(full_path):
-            os.makedirs(full_path)
+        if not os.path.exists(report_email.full_path):
+            os.makedirs(report_email.full_path)
         self.files = ("1.txt", "2.txt", "3.txt")
         self.lines = []
         for number, file in enumerate(self.files):
@@ -26,8 +26,8 @@ class TestMain(unittest.TestCase):
         """Tear down all the folders and files from full_path
         by deleting the folder, which is one folder up from the `full_path` 
         """
-        os.chdir(full_path)
-        os.path.dirname(full_path)
+        os.chdir(report_email.full_path)
+        os.path.dirname(report_email.full_path)
         shutil.rmtree(os.getcwd())
 
     def test_main(self) -> None:

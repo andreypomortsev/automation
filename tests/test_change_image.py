@@ -1,7 +1,7 @@
 import unittest
 import os.path
 from PIL import Image
-from source.changeImage import changer, DESTINATION
+from source.change_image import changer, DESTINATION
 
 
 class TestBulkImageProcess(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestBulkImageProcess(unittest.TestCase):
         )
         os.makedirs(self.test_dir, exist_ok=True)
         for img in self.test_images:
-            Image.new("RGB", (600, 400), color=(255, 0, 0)).save(
+            Image.new("RGB", (640, 480), color=(255, 0, 0)).save(
                 os.path.join(self.test_dir, img)
             )
 

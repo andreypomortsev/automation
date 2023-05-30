@@ -17,7 +17,8 @@ class TestMain(unittest.TestCase):
         self.files = ("1.txt", "2.txt", "3.txt")
         self.lines = []
         for number, file in enumerate(self.files):
-            with open(file, "w", encoding="UTF-8") as mock_file:
+            txt_path = os.path.join(report_email.full_path, file)
+            with open(txt_path, "w", encoding="UTF-8") as mock_file:
                 line = f"{number}Apple\n{number}00 lbs\nSuch a tasty {number} Apple\n"
                 self.lines.append(line)
                 mock_file.write(line)

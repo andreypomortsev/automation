@@ -34,6 +34,8 @@ from source import reports
 from source import run
 from source import emails
 
+PATH = "~/supplier-data/descriptions"
+full_path = os.path.expanduser(PATH)
 
 def main():
     """
@@ -52,8 +54,7 @@ def main():
     Returns:
         None
     """
-    PATH = "~/supplier-data/descriptions"
-    full_path = os.path.expanduser(PATH)
+
     descriptions = tuple(glob.glob(os.path.join(PATH, "*.txt")))
 
     # Report part

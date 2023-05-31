@@ -18,16 +18,18 @@ import os
 import glob
 from PIL import Image
 
-DESTINATION = os.path.expanduser("/supplier-data/images/")
+DESTINATION = os.path.expanduser("~/supplier-data/images/")
 
 if not os.path.exists(DESTINATION):
     os.makedirs(DESTINATION)
 
 
-def changer(img_name: str, dest_dir: str = DESTINATION):
+def changer(img_name: str, dest_dir: str | None = None) -> None:
     """Open image file resize it to 600x400
     and save to the DESTINATION folder
     """
+    if not dest_dir:
+        dest_dir = DESTINATION
     try:
         with Image.open(img_name) as img:
             if img.mode != "RGB":
@@ -38,7 +40,7 @@ def changer(img_name: str, dest_dir: str = DESTINATION):
         print(f"Error processing file {img_name}: {error}")
 
 
-os.chdir("~/supplier-data/images/")
+os.chdir(DESTINATION)
 images = glob.glob("*")
 
 for image in images:

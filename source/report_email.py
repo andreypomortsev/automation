@@ -3,20 +3,19 @@
 """
 A module to generate an update summary report and send it via email.
 
-The module includes a `main` function, which reads text files containing update descriptions
+The module includes a `make_message` function, which reads text files containing update descriptions
 in a specific directory, generates a summary using Report's `generate_report` function,
 attaches the resulting PDF report to an email message created using `generate` function
 of the `emails` module, and sends the email using `send` function of the `emails` module.
 
 Functions:
 ----------
-    main() -> None:
+    make_message() -> email.message.EmailMessage:
         Generates an update summary PDF report and sends it via email.
 
         Reads text files containing update descriptions and generates a summary using Report's
         `generate_report` function. The resulting PDF report is attached to an email message
-        created using `generate` function of the `emails` module. The email message is then sent
-        using `send` function of the `emails` module.
+        created using `generate` function of the `emails` module. 
 
         The details for the email sender is obtained from environment variable.
 
@@ -24,10 +23,12 @@ Functions:
             None
 
         Returns:
-            
+            email.message.EmailMessage
+
 Author: Andrey Pomortsev
 """
 
+import email
 import glob
 import os
 from source import reports
@@ -37,7 +38,7 @@ from source import emails
 PATH = "~/supplier-data/descriptions"
 full_path = os.path.expanduser(PATH)
 
-def main():
+def make_message() -> email.message.EmailMessage:
     """
     Generates an update summary PDF report and sends it via email.
 
@@ -52,7 +53,7 @@ def main():
         None
 
     Returns:
-        None
+        email.message.EmailMessage
     """
 
     descriptions = tuple(glob.glob(os.path.join(PATH, "*.txt")))
@@ -69,9 +70,9 @@ def main():
     subject = "Upload Completed - Online Fruit Store"
     body = "All fruits are uploaded to our website successfully. \
 	A detailed list is attached to this email."
-    message = emails.generate(sender, receiver, subject, body, attachement)
-    emails.send(message)
+    return emails.generate(sender, receiver, subject, body, attachement)
 
 
 if __name__ == "__main__":
-    main()
+    email_message = make_message()
+    emails.send(email_message)

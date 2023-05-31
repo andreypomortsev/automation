@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 import os
 from source import emails
-import smtplib
+
 
 class TestEmails(unittest.TestCase):
     def setUp(self) -> None:
@@ -33,18 +33,12 @@ class TestEmails(unittest.TestCase):
         self.assertEqual(attachment.get_filename(), attachment_filename)
         self.assertEqual(attachment.get_content_type(), "text/plain")
     
-    @mock.patch("smtplib.SMTP")
-    def test_emails_send(self, mock_smtp):
-        emails.send(self.message)
-        # Check that the SMTP object was created with the correct arguments
-        mock_smtp.assert_called_once_with("localhost")
-
-        # Check that the send_message() method was called with the message
-        context = mock_smtp.return_value.__enter__.return_value
-        context.send_message.assert_called_once_with(self.message)
-
-        # Check that the SMTP connection was closed
-        context.quit.assert_called_once()
+    @mock.patch('smtplib.SMTP')
+    def test_emails_send_with_server(self, mock_smtp):
+        emails.send(self.message, mock_smtp)
+        mock_smtp.assert_not_called()
+        mock_smtp.send_message.assert_called_once_with(self.message)
+        mock_smtp.quit.assert_called_once()
 
 
 if __name__ == '__main__':

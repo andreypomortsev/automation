@@ -38,8 +38,9 @@ def generate(sender, recipient, subject, body, attachment_path):
     return message
 
 
-def send(message):
+def send(message, mail_server=None):
     """Sends the message to the configured SMTP server."""
-    mail_server = smtplib.SMTP("localhost")
+    if not mail_server:
+        mail_server = smtplib.SMTP("localhost", debuglevel=1)
     mail_server.send_message(message)
     mail_server.quit()

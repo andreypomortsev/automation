@@ -41,6 +41,7 @@ def generate(sender, recipient, subject, body, attachment_path):
 def send(message, mail_server=None):
     """Sends the message to the configured SMTP server."""
     if not mail_server:
-        mail_server = smtplib.SMTP("localhost", debuglevel=1)
+        mail_server = smtplib.SMTP("localhost")
+        mail_server.set_debuglevel(1)
     mail_server.send_message(message)
     mail_server.quit()

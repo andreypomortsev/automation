@@ -7,10 +7,7 @@ from source import change_image
 class TestBulkImageProcess(unittest.TestCase):
     def setUp(self):
         self.test_images = ["apple.jpg", "banana.jpg", "grapes.jpeg"]
-        self.test_dir = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "test_images"
-        )
-        os.makedirs(self.test_dir, exist_ok=True)
+        self.test_dir = change_image.DESTINATION
         for img in self.test_images:
             Image.new("RGB", (640, 480), color=(255, 0, 0)).save(
                 os.path.join(self.test_dir, img)

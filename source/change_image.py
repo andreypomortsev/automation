@@ -19,7 +19,6 @@ import glob
 from PIL import Image
 
 DESTINATION = os.path.expanduser("/supplier-data/images/")
-folder_path = os.path.dirname(os.path.abspath(__file__))
 
 if not os.path.exists(DESTINATION):
     os.makedirs(DESTINATION)
@@ -43,7 +42,4 @@ os.chdir("~/supplier-data/images/")
 images = glob.glob("*")
 
 for image in images:
-    try:
-        changer(image)
-    except Exception as error:
-        print(f"Error processing file {image}: {error}")
+    changer(image)

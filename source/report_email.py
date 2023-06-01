@@ -29,6 +29,7 @@ Author: Andrey Pomortsev
 """
 
 import email
+from datetime import datetime
 import glob
 import os
 from source import reports
@@ -60,7 +61,8 @@ def make_message() -> email.message.EmailMessage:
 
     # Report part
     summary = [run.read_txt(file, False) for file in descriptions]
-    title = "Upload Completed - Online Fruit Store"
+    today_date = datetime.now().strftime("%B %d, %Y") # Today's date in format 'June 1, 2023'
+    title = f"Processed Update on {today_date}"
     attachement = "/tmp/processed.pdf"
     reports.generate_report(attachement, title, "<br/>".join(summary))
 

@@ -1,15 +1,12 @@
+#!/usr/bin/env python3
 import os
 import shutil
 import socket
 import psutil
 from source import emails
 
-BODY = "Please check your system and resolve the issue as soon as possible."
-SENDER = "automation@example.com"
-RECIPIENT = f"{os.environ.get('USER')}@example.com"
 
-
-def check_cpu() -> str | None:
+def check_cpu():
     """
     Check if the CPU usage is above 80%. If so, generate an email message with
     the subject "Error - CPU usage is over 80%" and the body text in the variable BODY,
@@ -17,13 +14,13 @@ def check_cpu() -> str | None:
 
     :return: None
     """
-    if psutil.cpu_percent(60) > 80:
+    if psutil.cpu_percent(5) > 80:
         subject = "Error - CPU usage is over 80%"
         return subject
     return None
 
 
-def check_ram() -> str | None:
+def check_ram():
     """
     Check if available memory is less than 500 MB. If so, generate an email message with
     the subject "Error - Available memory is less than 500MB" and the body text in the variable BODY
@@ -38,7 +35,7 @@ def check_ram() -> str | None:
     return None
 
 
-def check_disk() -> str | None:
+def check_disk():
     """
     Check if free disk space is less than 20%. If so, generate an email message
     with the subject "Error - Available disk space is less than 20%" and the body text
@@ -53,7 +50,7 @@ def check_disk() -> str | None:
     return None
 
 
-def check_network() -> str | None:
+def check_network():
     """
     Check if the local host can access the internet. If not, generate an email message
     with the subject "Error - localhost cannot be resolved to 127.0.0.1" and the body text
@@ -71,6 +68,14 @@ def system_check() -> None:
     """Test the system resources and send an email if there is something wrong"""
     for func in (check_cpu, check_ram, check_network, check_disk):
         subject = func()
+        print(subject)
         if subject:
-            message = emails.generate(SENDER, RECIPIENT, subject, BODY)
+            body = "Please check your system and resolve the issue as soon as possible."
+            sender = "automation@example.com"
+            recipient = "{}@example.com".format(os.environ.get("USER"))
+            message = emails.generate(sender, recipient, subject, body)
             emails.send(message=message)
+
+
+if __name__ == "__main__":
+    system_check()

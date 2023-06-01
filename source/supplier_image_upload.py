@@ -14,7 +14,7 @@ Usage:
 3. Run the module to upload all JPEG images to the server.
 
 Example:
-$ python3 upload_images.py
+$ python3 supplier_image_upload.py
 
 Requirements:
 - Python 3.6 or later

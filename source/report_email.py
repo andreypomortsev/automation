@@ -59,9 +59,7 @@ def make_message() -> email.message.EmailMessage:
     descriptions = glob.glob("*.txt")
 
     # Report part
-    print("Descriptions", descriptions)
     summary = [run.read_txt(file, False) for file in descriptions]
-    print("Summary", summary)
     today_date = datetime.now().strftime(
         "%B %d, %Y"
     )  # Today's date in format 'June 1, 2023'

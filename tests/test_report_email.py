@@ -7,7 +7,7 @@ from unittest import mock
 from source import reports, report_email
 
 
-class PathTestsMixin:
+class PathTests:
     """
     This mixin provides a set of assertion methods to test
     whether a given path is a folder or a file.
@@ -34,7 +34,7 @@ class PathTestsMixin:
         return self.assertTrue(isfile(path), msg)
 
 
-class TestReportEmail(unittest.TestCase, PathTestsMixin):
+class TestReportEmail(unittest.TestCase, PathTests):
     """Test source/report_emails.py"""
 
     def setUp(self) -> None:

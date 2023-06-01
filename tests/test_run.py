@@ -4,7 +4,7 @@
 import os
 import unittest
 from unittest.mock import patch
-from source.run import read_txt, POST_PATH
+from source import run
 
 
 class TestUpload(unittest.TestCase):
@@ -48,7 +48,7 @@ class TestUpload(unittest.TestCase):
             None.
         """
         expected_output = "name: Apple\nweight: 3 lbs"
-        output = read_txt(self.txt_file, False)
+        output = run.read_txt(self.txt_file, False)
         self.assertEqual(output, expected_output)
 
     @patch("source.run.requests.post")
@@ -69,12 +69,12 @@ class TestUpload(unittest.TestCase):
             None.
         """
         # Call the function with the temporary file and send flag set to True
-        output_str = read_txt(self.txt_file, send=True)
+        output_str = run.read_txt(self.txt_file, send=True)
         # Check that the expected string is returned
         self.assertEqual(output_str, "name: Apple\nweight: 3 lbs")
         # Check that requests.post() was called with the expected arguments
         mock_post.assert_called_with(
-            POST_PATH,
+            run.POST_PATH,
             json={
                 "name": "Apple",
                 "weight": 3,

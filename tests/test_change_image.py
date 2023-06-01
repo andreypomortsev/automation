@@ -8,10 +8,11 @@ class TestBulkImageProcess(unittest.TestCase):
     """
     A class for testing the bulk image processing functionality of the 'change_image' module.
     """
+
     def setUp(self):
         """
         Initializes test data by creating test images in the destination directory.
-        
+
         :return: None
         """
         self.test_images = ["apple.jpg", "banana.jpg", "grapes.jpeg"]
@@ -24,7 +25,7 @@ class TestBulkImageProcess(unittest.TestCase):
     def tearDown(self):
         """
         Removes test images from the destination directory.
-        
+
         :return: None
         """
         for img in self.test_images:
@@ -32,9 +33,9 @@ class TestBulkImageProcess(unittest.TestCase):
 
     def test_changer_resizes_and_saves_image(self):
         """
-        Tests the 'changer' method of the 'change_image' module by verifying 
+        Tests the 'changer' method of the 'change_image' module by verifying
         that it resizes and saves an image correctly.
-        
+
         :return: None
         """
         img_path = os.path.join(self.test_dir, "apple.jpg")

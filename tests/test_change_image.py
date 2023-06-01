@@ -15,6 +15,10 @@ class TestBulkImageProcess(unittest.TestCase):
 
         :return: None
         """
+        path = os.path.expanduser("~/supplier-data/images")
+        if not os.path.exists(path):
+            os.makedirs(path)
+        os.chdir(path)
         self.test_images = ["apple.jpg", "banana.jpg", "grapes.jpeg"]
         self.test_dir = change_image.DESTINATION
         for img in self.test_images:

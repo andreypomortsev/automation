@@ -32,12 +32,11 @@ import email
 from datetime import datetime
 import glob
 import os
-from source import reports
-from source import run
-from source import emails
+from source import reports, run, emails
 
 PATH = "~/supplier-data/descriptions"
 full_path = os.path.expanduser(PATH)
+
 
 def make_message() -> email.message.EmailMessage:
     """
@@ -56,12 +55,16 @@ def make_message() -> email.message.EmailMessage:
     Returns:
         email.message.EmailMessage
     """
-
-    descriptions = tuple(glob.glob(os.path.join(PATH, "*.txt")))
+    os.chdir(full_path)
+    descriptions = glob.glob("*.txt")
 
     # Report part
+    print("Descriptions", descriptions)
     summary = [run.read_txt(file, False) for file in descriptions]
-    today_date = datetime.now().strftime("%B %d, %Y") # Today's date in format 'June 1, 2023'
+    print("Summary", summary)
+    today_date = datetime.now().strftime(
+        "%B %d, %Y"
+    )  # Today's date in format 'June 1, 2023'
     title = f"Processed Update on {today_date}"
     attachement = "/tmp/processed.pdf"
     reports.generate_report(attachement, title, "<br/>".join(summary))

@@ -69,8 +69,8 @@ def check_network() -> str | None:
 
 def system_check() -> None:
     """Test the system resources and send an email if there is something wrong"""
-    for func in (check_cpu, check_disk, check_network, check_ram):
+    for func in (check_cpu, check_ram, check_network, check_disk):
         subject = func()
-        if not subject:
+        if subject:
             message = emails.generate(SENDER, RECIPIENT, subject, BODY)
             emails.send(message=message)

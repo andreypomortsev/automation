@@ -22,7 +22,7 @@ def generate(
     recipient: str,
     subject: str,
     body: str,
-    attachment_path: str | None = None,
+    attachment_path=None,
 ) -> email.message.EmailMessage:
     """Creates an email with or w/o an attachement."""
     message = email.message.EmailMessage()

@@ -23,19 +23,19 @@ containing keys "name", "weight", "description", and "image_name".
 
 Author: Andrey Pomortsev
 """
-
+import os
 import glob
 import requests
 
 IP = "localhost"
-PATH_TO_TXT = "~/supplier-data/descriptions/*.txt"
+PATH_TO_TXT = os.path.expanduser("~/supplier-data/descriptions/")
 POST_PATH = f"http://{IP}/fruits/"
-
-reviews = glob.glob(PATH_TO_TXT)
+os.chdir(PATH_TO_TXT)
+reviews = glob.glob("*.txt")
 dict_keys = ["name", "weight", "description"]
 
 
-def read_txt(txt_file: str, send: bool = True):
+def read_txt(txt_file: str, send: bool = True) -> str:
     """
     Reads a text file containing data about a fruit, including its name, weight,
     and description. Returns a formatted string with the fruit name and weight.
@@ -53,8 +53,8 @@ def read_txt(txt_file: str, send: bool = True):
         data = {
             key: value.strip("\nlbs") for key, value in zip(dict_keys, file.readlines())
         }
-        data |= {"image_name": txt_file}
-        data['weight'] = int(data['weight'])
+        data["image_name"] = txt_file.replace("txt", "jpeg")
+        data["weight"] = int(data["weight"])
         if send:
             response = requests.post(POST_PATH, json=data, timeout=2)
             print(response.status_code)

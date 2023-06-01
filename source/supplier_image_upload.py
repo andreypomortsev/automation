@@ -30,8 +30,8 @@ import glob
 import os
 import requests
 
-URL = "http://localhost/uploads"
-os.chdir("~/supplier-data/images/")
+URL = "http://localhost/upload/"
+os.chdir(os.path.expanduser("~/supplier-data/images/"))
 images = tuple(glob.glob("*.jpeg"))
 
 for image in images:

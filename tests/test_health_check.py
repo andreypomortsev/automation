@@ -33,7 +33,7 @@ class TestCheckHealthCheck(unittest.TestCase):
     def test_check_disk_below_threshold(self, mock_disk):
         total = 10000  # 10 GB
         used = 8500  # 8.5 GB
-        free = total - used  # 2 GB
+        free = total - used  # 1.5 GB
         mock_disk.return_value = MagicMock(total=total, used=used, free=free)
         result = health_check.check_disk()
         self.assertEqual(result, "Error - Available disk space is less than 20%")
